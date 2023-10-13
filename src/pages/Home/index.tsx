@@ -1,10 +1,42 @@
 import React, { useState } from 'react';
-import { Center, Flex, Input, Text, Button, Stack } from '@chakra-ui/react';
+import {
+  Center,
+  Flex,
+  Input,
+  Text,
+  Button,
+  Stack,
+  Card,
+  CardHeader,
+  Heading,
+  CardBody,
+  CardFooter,
+} from '@chakra-ui/react';
 
 export default function Home() {
   const [numbersToDraw, setNumbersToDraw] = useState<number>(1);
   const [minNumber, setMinNumber] = useState<number>(1);
   const [maxNumber, setMaxNumber] = useState<number>(100);
+  const [listNumbers, setListNumbers] = useState<Array<number>>([]);
+
+  function getRandomNumberBetween(min: number, max: number) {
+    return Math.ceil(Math.random() * (max - min) + min);
+  }
+
+  function handleDrawNumbers() {
+    const list = [];
+
+    for (let index = 0; index < numbersToDraw; index++) {
+      const num = getRandomNumberBetween(minNumber, maxNumber);
+      list.push(num);
+    }
+
+    setListNumbers(list);
+  }
+
+  function handleClear() {
+    setListNumbers([]);
+  }
 
   return (
     <Flex
@@ -20,7 +52,7 @@ export default function Home() {
           </Text>
         </Center>
 
-        <Flex justifyContent="space-around" alignItems="center" mb={4}>
+        <Stack direction="row" spacing={4} align="center" mb={4}>
           <Text fontSize="2xl" color="white">
             Sortear
           </Text>
@@ -29,6 +61,7 @@ export default function Home() {
             background="barber.400"
             variant="filled"
             size="lg"
+            border="1px"
             bg="sorteador.900"
             color="white"
             value={numbersToDraw}
@@ -37,7 +70,7 @@ export default function Home() {
           <Text fontSize="2xl" color="white">
             número{numbersToDraw > 1 ? 's' : ''}
           </Text>
-        </Flex>
+        </Stack>
 
         <Stack direction="row" spacing={4} align="center" mb={4}>
           <Text fontSize="2xl" color="white">
@@ -48,6 +81,7 @@ export default function Home() {
             background="barber.400"
             variant="filled"
             size="lg"
+            border="1px"
             bg="sorteador.900"
             color="white"
             value={minNumber}
@@ -61,6 +95,7 @@ export default function Home() {
             background="barber.400"
             variant="filled"
             size="lg"
+            border="1px"
             bg="sorteador.900"
             color="white"
             value={maxNumber}
@@ -74,9 +109,44 @@ export default function Home() {
           color="gray.900"
           size="lg"
           _hover={{ bg: '#FFB13E' }}
+          onClick={handleDrawNumbers}
         >
           Sortear números
         </Button>
+
+        {listNumbers.length > 0 && (
+          <Card align="center">
+            <CardHeader>
+              <Heading size="md">Resultado do Sorteio:</Heading>
+            </CardHeader>
+            <CardBody>
+              <Stack
+                direction="row"
+                spacing={2}
+                align="center"
+                mb={4}
+                wrap="wrap"
+              >
+                {listNumbers.map((number, index) => (
+                  <Text
+                    key={index}
+                    bg="sorteador.100"
+                    fontWeight="bold"
+                    p={2}
+                    rounded="50%"
+                  >
+                    {number < 10 ? `0${number}` : number}
+                  </Text>
+                ))}
+              </Stack>
+            </CardBody>
+            <CardFooter>
+              <Button colorScheme="blue" onClick={handleClear}>
+                Novo Sorteio
+              </Button>
+            </CardFooter>
+          </Card>
+        )}
       </Flex>
     </Flex>
   );
