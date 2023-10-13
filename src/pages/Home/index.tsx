@@ -12,6 +12,7 @@ import {
   CardBody,
   CardFooter,
 } from '@chakra-ui/react';
+import { toast } from 'react-toastify';
 
 export default function Home() {
   const [numbersToDraw, setNumbersToDraw] = useState<number>(1);
@@ -36,6 +37,21 @@ export default function Home() {
 
   function handleClear() {
     setListNumbers([]);
+  }
+
+  function handleCopy() {
+    navigator.clipboard.writeText(listNumbers.toString()).then(() => {
+      toast.success('Sorteio copiado!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    });
   }
 
   return (
@@ -141,8 +157,11 @@ export default function Home() {
               </Stack>
             </CardBody>
             <CardFooter>
-              <Button colorScheme="blue" onClick={handleClear}>
+              <Button colorScheme="yellow" onClick={handleClear} mr={2}>
                 Novo Sorteio
+              </Button>
+              <Button colorScheme="green" onClick={handleCopy}>
+                Copiar números
               </Button>
             </CardFooter>
           </Card>
