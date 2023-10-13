@@ -1,6 +1,7 @@
 import React from 'react';
+import Home from './pages/Home';
 
-import { ChakraProvider, extendBaseTheme } from '@chakra-ui/react';
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 
 const colors = {
   sorteador: {
@@ -19,14 +20,12 @@ const colors = {
   },
 };
 
-const theme = extendBaseTheme(colors);
+const theme = extendTheme({ colors });
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <div>
-        <h1>Teste</h1>
-      </div>
+      <Home />
     </ChakraProvider>
   );
 }
