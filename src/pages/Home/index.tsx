@@ -25,7 +25,7 @@ export default function Home() {
   }
 
   function handleDrawNumbers() {
-    const list = [];
+    const list: number[] = [];
 
     for (let index = 0; index < numbersToDraw; index++) {
       const num = getRandomNumberBetween(minNumber, maxNumber);
@@ -62,78 +62,84 @@ export default function Home() {
       justifyContent="center"
     >
       <Flex width={640} direction="column" p={14} rounded={8}>
-        <Center mb={4}>
-          <Text fontSize="3xl" fontWeight="bold" color="orange.900">
-            Sorteador
-          </Text>
-        </Center>
+        {listNumbers.length === 0 && (
+          <>
+            <Center mb={4}>
+              <Text fontSize="3xl" fontWeight="bold" color="orange.900">
+                Sorteador
+              </Text>
+            </Center>
 
-        <Stack direction="row" spacing={4} align="center" mb={4}>
-          <Text fontSize="2xl" color="white">
-            Sortear
-          </Text>
-          <Input
-            type="number"
-            background="barber.400"
-            variant="filled"
-            size="lg"
-            border="1px"
-            bg="sorteador.900"
-            color="white"
-            value={numbersToDraw}
-            onChange={(e) => setNumbersToDraw(Number(e.target.value))}
-          />
-          <Text fontSize="2xl" color="white">
-            número{numbersToDraw > 1 ? 's' : ''}
-          </Text>
-        </Stack>
+            <Stack direction="row" spacing={4} align="center" mb={4}>
+              <Text fontSize="2xl" color="white">
+                Sortear
+              </Text>
+              <Input
+                type="number"
+                background="barber.400"
+                variant="filled"
+                size="lg"
+                border="1px"
+                bg="sorteador.900"
+                color="white"
+                value={numbersToDraw}
+                onChange={(e) => setNumbersToDraw(Number(e.target.value))}
+              />
+              <Text fontSize="2xl" color="white">
+                número{numbersToDraw > 1 ? 's' : ''}
+              </Text>
+            </Stack>
 
-        <Stack direction="row" spacing={4} align="center" mb={4}>
-          <Text fontSize="2xl" color="white">
-            Entre
-          </Text>
-          <Input
-            type="number"
-            background="barber.400"
-            variant="filled"
-            size="lg"
-            border="1px"
-            bg="sorteador.900"
-            color="white"
-            value={minNumber}
-            onChange={(e) => setMinNumber(Number(e.target.value))}
-          />
-          <Text fontSize="2xl" color="white">
-            e
-          </Text>
-          <Input
-            type="number"
-            background="barber.400"
-            variant="filled"
-            size="lg"
-            border="1px"
-            bg="sorteador.900"
-            color="white"
-            value={maxNumber}
-            onChange={(e) => setMaxNumber(Number(e.target.value))}
-          />
-        </Stack>
+            <Stack direction="row" spacing={4} align="center" mb={4}>
+              <Text fontSize="2xl" color="white">
+                Entre
+              </Text>
+              <Input
+                type="number"
+                background="barber.400"
+                variant="filled"
+                size="lg"
+                border="1px"
+                bg="sorteador.900"
+                color="white"
+                value={minNumber}
+                onChange={(e) => setMinNumber(Number(e.target.value))}
+              />
+              <Text fontSize="2xl" color="white">
+                e
+              </Text>
+              <Input
+                type="number"
+                background="barber.400"
+                variant="filled"
+                size="lg"
+                border="1px"
+                bg="sorteador.900"
+                color="white"
+                value={maxNumber}
+                onChange={(e) => setMaxNumber(Number(e.target.value))}
+              />
+            </Stack>
 
-        <Button
-          background="button.cta"
-          mb={6}
-          color="gray.900"
-          size="lg"
-          _hover={{ bg: '#FFB13E' }}
-          onClick={handleDrawNumbers}
-        >
-          Sortear números
-        </Button>
+            <Button
+              background="button.cta"
+              mb={6}
+              color="gray.900"
+              size="lg"
+              _hover={{ bg: '#FFB13E' }}
+              onClick={handleDrawNumbers}
+            >
+              Sortear números
+            </Button>
+          </>
+        )}
 
         {listNumbers.length > 0 && (
-          <Card align="center">
+          <Card align="center" bg="gray.500">
             <CardHeader>
-              <Heading size="md">Resultado do Sorteio:</Heading>
+              <Heading size="md" color="white">
+                Resultado do Sorteio:
+              </Heading>
             </CardHeader>
             <CardBody>
               <Stack
