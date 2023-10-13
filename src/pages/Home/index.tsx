@@ -26,15 +26,16 @@ export default function Home() {
           </Text>
           <Input
             type="number"
-            htmlSize={4}
-            width="auto"
+            background="barber.400"
+            variant="filled"
+            size="lg"
             bg="sorteador.900"
             color="white"
             value={numbersToDraw}
             onChange={(e) => setNumbersToDraw(Number(e.target.value))}
           />
           <Text fontSize="2xl" color="white">
-            números
+            número{numbersToDraw > 1 ? 's' : ''}
           </Text>
         </Flex>
 
@@ -44,8 +45,9 @@ export default function Home() {
           </Text>
           <Input
             type="number"
-            htmlSize={4}
-            width="auto"
+            background="barber.400"
+            variant="filled"
+            size="lg"
             bg="sorteador.900"
             color="white"
             value={minNumber}
@@ -56,8 +58,9 @@ export default function Home() {
           </Text>
           <Input
             type="number"
-            htmlSize={4}
-            width="auto"
+            background="barber.400"
+            variant="filled"
+            size="lg"
             bg="sorteador.900"
             color="white"
             value={maxNumber}
