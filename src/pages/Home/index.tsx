@@ -12,7 +12,9 @@ import {
   CardBody,
   CardFooter,
   Checkbox,
-  CheckboxGroup,
+  Alert,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react';
 import { toast } from 'react-toastify';
 
@@ -191,13 +193,14 @@ export default function Home() {
                 direction="row"
                 spacing={2}
                 align="center"
+                justify="center"
                 mb={4}
                 wrap="wrap"
               >
                 {listNumbers.map((number, index) => (
                   <Text
                     key={index}
-                    bg="sorteador.100"
+                    bg="orange.900"
                     fontWeight="bold"
                     p={2}
                     rounded="50%"
@@ -205,6 +208,34 @@ export default function Home() {
                     {number < 10 ? `0${number}` : number}
                   </Text>
                 ))}
+              </Stack>
+
+              <Stack
+                direction="row"
+                spacing={2}
+                align="center"
+                justify="center"
+                mb={4}
+                wrap="wrap"
+              >
+                <Alert status="info">
+                  <AlertTitle>Data do sorteio:</AlertTitle>
+                  <AlertDescription>
+                    {new Date().toDateString()}
+                  </AlertDescription>
+                </Alert>
+
+                <Alert status="info">
+                  <AlertTitle>Quantidade de números sortiados:</AlertTitle>
+                  <AlertDescription>{numbersToDraw}</AlertDescription>
+                </Alert>
+
+                <Alert status="info">
+                  <AlertTitle>Sorteio entre:</AlertTitle>
+                  <AlertDescription>
+                    {minNumber} e {maxNumber}
+                  </AlertDescription>
+                </Alert>
               </Stack>
             </CardBody>
             <CardFooter>
