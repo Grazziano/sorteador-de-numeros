@@ -11,6 +11,8 @@ import {
   Heading,
   CardBody,
   CardFooter,
+  Checkbox,
+  CheckboxGroup,
 } from '@chakra-ui/react';
 import { toast } from 'react-toastify';
 
@@ -19,6 +21,7 @@ export default function Home() {
   const [minNumber, setMinNumber] = useState<number>(1);
   const [maxNumber, setMaxNumber] = useState<number>(100);
   const [listNumbers, setListNumbers] = useState<Array<number>>([]);
+  const [orderAsc, setOrderAsc] = useState<boolean>(false);
 
   function getRandomNumberBetween(min: number, max: number) {
     return Math.ceil(Math.random() * (max - min) + min);
@@ -30,6 +33,11 @@ export default function Home() {
     for (let index = 0; index < numbersToDraw; index++) {
       const num = getRandomNumberBetween(minNumber, maxNumber);
       list.push(num);
+    }
+
+    if (orderAsc) {
+      setListNumbers(list.sort());
+      return;
     }
 
     setListNumbers(list);
@@ -121,6 +129,22 @@ export default function Home() {
                 value={maxNumber}
                 onChange={(e) => setMaxNumber(Number(e.target.value))}
               />
+            </Stack>
+
+            <Stack
+              spacing={5}
+              direction="row"
+              align="center"
+              mb={4}
+              color="white"
+            >
+              <Checkbox
+                colorScheme="green"
+                isChecked={orderAsc}
+                onChange={(e) => setOrderAsc(e.target.checked)}
+              >
+                Ordenar Números
+              </Checkbox>
             </Stack>
 
             <Button
