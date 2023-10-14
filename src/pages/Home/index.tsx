@@ -40,18 +40,20 @@ export default function Home() {
   }
 
   function handleCopy() {
-    navigator.clipboard.writeText(listNumbers.toString()).then(() => {
-      toast.success('Sorteio copiado!', {
-        position: 'top-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
+    navigator.clipboard
+      .writeText(listNumbers.toString().replaceAll(',', '-'))
+      .then(() => {
+        toast.success('Sorteio copiado!', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
       });
-    });
   }
 
   return (
