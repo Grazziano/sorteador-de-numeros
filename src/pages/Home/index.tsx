@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import {
+  exportComponentAsJPEG,
+  exportComponentAsPNG,
+} from 'react-component-export-image';
 import {
   Center,
   Flex,
@@ -25,6 +29,8 @@ export default function Home() {
   const [listNumbers, setListNumbers] = useState<Array<number>>([]);
   const [orderAsc, setOrderAsc] = useState<boolean>(false);
   const [allowRepeat, setAllowRepeat] = useState<boolean>(false);
+
+  const componentRef = useRef<HTMLInputElement>(null);
 
   function getRandomNumberBetween(min: number, max: number) {
     return Math.ceil(Math.random() * (max - min) + min);
@@ -182,9 +188,9 @@ export default function Home() {
         )}
 
         {listNumbers.length > 0 && (
-          <Card align="center" bg="gray.500">
+          <Card align="center" bg="gray.500" ref={componentRef}>
             <CardHeader>
-              <Heading size="md" color="white">
+              <Heading size="lg" color="orange.900">
                 Resultado do Sorteio:
               </Heading>
             </CardHeader>
@@ -196,11 +202,12 @@ export default function Home() {
                 justify="center"
                 mb={4}
                 wrap="wrap"
+                // ref={componentRef}
               >
                 {listNumbers.map((number, index) => (
                   <Text
                     key={index}
-                    bg="orange.900"
+                    bg="white"
                     fontWeight="bold"
                     p={2}
                     rounded="50%"
@@ -238,12 +245,26 @@ export default function Home() {
                 </Alert>
               </Stack>
             </CardBody>
-            <CardFooter>
-              <Button colorScheme="yellow" onClick={handleClear} mr={2}>
+            <CardFooter gap={2}>
+              <Button colorScheme="yellow" onClick={handleClear} size="xs">
                 Novo Sorteio
               </Button>
-              <Button colorScheme="green" onClick={handleCopy}>
+              <Button colorScheme="green" onClick={handleCopy} size="xs">
                 Copiar números
+              </Button>
+              {/* <Button
+                colorScheme="red"
+                onClick={() => exportComponentAsJPEG(componentRef)}
+                size="xs"
+              >
+                Export As JPEG
+              </Button> */}
+              <Button
+                colorScheme="purple"
+                onClick={() => exportComponentAsPNG(componentRef)}
+                size="xs"
+              >
+                Export As PNG
               </Button>
             </CardFooter>
           </Card>
