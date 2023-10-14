@@ -30,7 +30,7 @@ Para abrir e rodar o projeto, entre na pasta do projeto e execute ```npm install
 Depois, acesse <a href="http://localhost:3000/">http://localhost:3000/</a> no seu navegador.
 
 ### 🚧 Projeto em produção
-Este projeto pode ser visualizado neste [link]().
+Este projeto pode ser visualizado neste [link](https://sorteador-de-numeros-cbzbrgl9l-grazziano.vercel.app/).
 
 ## 📚 Mais informações
 
