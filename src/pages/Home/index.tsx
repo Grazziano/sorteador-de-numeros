@@ -56,7 +56,10 @@ export default function Home() {
     }
 
     if (orderAsc) {
-      setListNumbers(list.sort());
+      const orderNumbers = list.sort(function (a, b) {
+        return a - b;
+      });
+      setListNumbers(orderNumbers);
       return;
     }
 
