@@ -22,6 +22,7 @@ export default function Home() {
   const [maxNumber, setMaxNumber] = useState<number>(100);
   const [listNumbers, setListNumbers] = useState<Array<number>>([]);
   const [orderAsc, setOrderAsc] = useState<boolean>(false);
+  const [allowRepeat, setAllowRepeat] = useState<boolean>(false);
 
   function getRandomNumberBetween(min: number, max: number) {
     return Math.ceil(Math.random() * (max - min) + min);
@@ -31,7 +32,18 @@ export default function Home() {
     const list: number[] = [];
 
     for (let index = 0; index < numbersToDraw; index++) {
-      const num = getRandomNumberBetween(minNumber, maxNumber);
+      let num = getRandomNumberBetween(minNumber, maxNumber);
+
+      if (allowRepeat) {
+        if (list.indexOf(num) === -1) {
+          list.push(num);
+          continue;
+        } else {
+          index--;
+          continue;
+        }
+      }
+
       list.push(num);
     }
 
@@ -139,11 +151,18 @@ export default function Home() {
               color="white"
             >
               <Checkbox
-                colorScheme="green"
+                colorScheme="orange"
                 isChecked={orderAsc}
                 onChange={(e) => setOrderAsc(e.target.checked)}
               >
                 Ordenar Números
+              </Checkbox>
+              <Checkbox
+                colorScheme="orange"
+                isChecked={allowRepeat}
+                onChange={(e) => setAllowRepeat(e.target.checked)}
+              >
+                Não Permitir Repetição
               </Checkbox>
             </Stack>
 
